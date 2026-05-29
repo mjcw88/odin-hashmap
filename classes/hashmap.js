@@ -2,6 +2,7 @@ export class HashMap {
     constructor() {
         this.loadFactor = 0.75;
         this.capacity = 16;
+        this.buckets = new Array(this.capacity);
     }
 
     hash(key) {
@@ -17,11 +18,19 @@ export class HashMap {
     } 
 
     set(key, value) {
+        const hash = this.hash(key);
+        if (!this.buckets[hash]) {
+            this.buckets[hash] = { key, value, next: null };
+        } else {
+            // Loop through linked list of hash index to find if key already exists, if so overwrite, if not then save as new entry;
+        }
 
+        if (this.length() > this.capacity * this.loadFactor) this.capacity * 2;
     }
 
     get(key) {
-
+        const hash = this.hash(key);
+        return this.buckets[hash].value;
     }
 
     has(key) {
@@ -33,7 +42,7 @@ export class HashMap {
     }
 
     length() {
-
+        return this.buckets.filter(bucket => bucket.length > 0).length;
     }
 
     clear() {
