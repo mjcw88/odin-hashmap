@@ -6,8 +6,14 @@ export class HashMap {
         this.buckets = new Array(this.capacity);
     }
 
+    // Private helper functions
     #assignKey(key, value, buckets) {
         const index = this.hash(key);
+
+        if (index < 0 || index >= buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
         if (!buckets[index]) {
             buckets[index] = { key, value, next: null };
             this.size++;
@@ -52,6 +58,7 @@ export class HashMap {
         this.buckets = newBuckets;
     }
 
+    // Public methods
     hash(key) {
         const cap = this.capacity;
         let hashCode = 0;
@@ -71,6 +78,11 @@ export class HashMap {
 
     get(key) {
         const index = this.hash(key);
+
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
         if (!this.buckets[index]) return null;
 
         let current = this.buckets[index];
@@ -78,14 +90,50 @@ export class HashMap {
             if (current.key === key) return current.value;
             current = current.next;
         }
+        return null;
     }
 
     has(key) {
+        const index = this.hash(key);
 
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        if (!this.buckets[index]) return false;
+
+        let current = this.buckets[index];
+        while (current) {
+            if (current.key === key) return true;
+            current = current.next;
+        }
+        return false;
     }
 
     remove(key) {
+        const index = this.hash(key);
 
+        if (index < 0 || index >= this.buckets.length) {
+            throw new Error("Trying to access index out of bounds");
+        }
+
+        if (!this.buckets[index]) return false;
+
+        let previous = null;
+        let current = this.buckets[index];
+        while (current) {
+            if (current.key === key) {
+                if (previous) {
+                    previous.next = current.next;
+                } else {
+                    this.buckets[index] = current.next;
+                }
+                return true;
+            }
+            previous = current;
+            current = current.next;
+        }
+        return false;
     }
 
     length() {

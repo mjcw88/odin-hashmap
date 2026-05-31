@@ -28,3 +28,5 @@ console.log(test.hash("Darth Vader"));
 console.log(test.hash("Palpatine"));
 console.log(test.hash("Lando"));
 console.log(test.hash("Wicket"));
+console.log(test.hash("Boba Fett"));
+console.log(test.hash("Yoda"));

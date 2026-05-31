@@ -1,0 +1,12 @@
+console.log(test.hash("Han"));
+// console.log(test.hash("Leia"));
+// console.log(test.hash("Anakin"));
+// console.log(test.hash("Obi Wan"));
+// console.log(test.hash("Chewbacca"));
+// console.log(test.hash("R2D2"));
+// console.log(test.hash("C3PO"));
+// console.log(test.hash("Jabba"));
+// console.log(test.hash("Darth Vader"));
+// console.log(test.hash("Palpatine"));
+// console.log(test.hash("Lando"));
+// console.log(test.hash("Wicket"));
