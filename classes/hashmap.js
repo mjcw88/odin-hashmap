@@ -128,6 +128,7 @@ export class HashMap {
                 } else {
                     this.buckets[index] = current.next;
                 }
+                this.size--;
                 return true;
             }
             previous = current;
@@ -141,6 +142,7 @@ export class HashMap {
     }
 
     clear() {
+        this.size = 0;
         this.buckets.forEach((bucket, index) => {
             if (bucket) this.buckets[index] = null;
         })

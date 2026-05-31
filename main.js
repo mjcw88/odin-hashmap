@@ -15,18 +15,50 @@ test.set("jacket", "blue");
 test.set("kite", "pink");
 test.set("lion", "golden");
 
-console.log(test.hash("Luke"));
-console.log(test.hash("Han"));
-console.log(test.hash("Leia"));
-console.log(test.hash("Anakin"));
-console.log(test.hash("Obi Wan"));
-console.log(test.hash("Chewbacca"));
-console.log(test.hash("R2D2"));
-console.log(test.hash("C3PO"));
-console.log(test.hash("Jabba"));
-console.log(test.hash("Darth Vader"));
-console.log(test.hash("Palpatine"));
-console.log(test.hash("Lando"));
-console.log(test.hash("Wicket"));
-console.log(test.hash("Boba Fett"));
-console.log(test.hash("Yoda"));
+console.log("--------------------");
+console.log(test.entries());
+console.log("length: " + test.length());
+console.log("capacity: " + test.capacity);
+
+test.set("apple", "green");
+test.set("banana", "brown");
+test.set("carrot", "purple");
+test.set("dog", "black");
+
+console.log("--------------------");
+console.log(test.entries());
+console.log("length: " + test.length());
+console.log("capacity: " + test.capacity);
+
+test.set("moon", "silver");
+
+console.log("--------------------");
+console.log(test.entries());
+console.log("length: " + test.length());
+console.log("capacity: " + test.capacity);
+
+test.set("frog", "yellow");
+test.set("grape", "green");
+test.set("hat", "blue");
+test.set("ice cream", "pink");
+
+console.log("--------------------");
+console.log(test.entries());
+console.log("length: " + test.length());
+console.log("capacity: " + test.capacity);
+
+console.log("--------------------");
+console.log("get ice cream: " + test.get("ice cream"));
+console.log("has ice cream: " + test.has("ice cream"));
+console.log("remove ice cream: " + test.remove("ice cream"));
+console.log("length: " + test.length());
+console.log(test.keys());
+console.log(test.values());
+console.log(test.entries());
+
+test.clear();
+
+console.log("--------------------");
+console.log(test.entries());
+console.log("length: " + test.length());
+console.log("capacity: " + test.capacity);

@@ -78,7 +78,7 @@ describe("HashMap (set)", () => {
             ["Luke", "Jedi"],
             ["Han", "Smuggler"],
             ["Leia", "Rebel Leader"],
-            ["Anakin", "Jedi"],
+            ["Boba Fett", "Bounty Hunter"],
             ["Obi Wan", "Jedi"],
             ["Chewbacca", "Smuggler"],
             ["R2D2", "Droid"],
@@ -87,7 +87,7 @@ describe("HashMap (set)", () => {
             ["Darth Vader", "Sith Lord"],
             ["Palpatine", "Sith Lord"],
             ["Lando", "Smuggler"],
-            ["Wicket", "Ewok"]
+            ["Yoda", "Jedi"]
         ];
         for (const [key, value] of characters) {
             hashMap.set(key, value);
