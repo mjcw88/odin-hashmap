@@ -137,7 +137,7 @@ export class HashMap {
     }
 
     length() {
-        return 0;
+        return this.size;
     }
 
     clear() {
