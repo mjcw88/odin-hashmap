@@ -1,4 +1,4 @@
-export class HashMap {
+export class HashSet {
     constructor() {
         this.loadFactor = 0.75;
         this.capacity = 16;
@@ -7,7 +7,7 @@ export class HashMap {
     }
 
     // Private helper functions
-    #assignKey(key, value, buckets) {
+    #assignKey(key, buckets) {
         const index = this.hash(key);
 
         if (index < 0 || index >= buckets.length) {
@@ -15,21 +15,18 @@ export class HashMap {
         }
 
         if (!buckets[index]) {
-            buckets[index] = { key, value, next: null };
+            buckets[index] = { key, next: null };
             this.size++;
         } else {
             let current = buckets[index];
             let previous = null;
 
             while (current) {
-                if (current.key === key) {
-                    current.value = value;
-                    return;
-                }; 
+                if (current.key === key) return;
                 previous = current;
                 current = current.next;
             }
-            previous.next = { key, value, next: null }
+            previous.next = { key, next: null }
             this.size++;
         }
     }
@@ -47,7 +44,7 @@ export class HashMap {
             if (bucket) {
                 let current = bucket;
                 while (current) {
-                    this.#assignKey(current.key, current.value, newBuckets);
+                    this.#assignKey(current.key, newBuckets);
                     current = current.next;
                 }
             }
@@ -68,26 +65,9 @@ export class HashMap {
         return hashCode;
     } 
 
-    set(key, value) {
-        this.#assignKey(key, value, this.buckets);
+    set(key) {
+        this.#assignKey(key, this.buckets);
         if (this.#isAtCapacity()) this.#expandBuckets();
-    }
-
-    get(key) {
-        const index = this.hash(key);
-
-        if (index < 0 || index >= this.buckets.length) {
-            throw new Error("Trying to access index out of bounds");
-        }
-
-        if (!this.buckets[index]) return null;
-
-        let current = this.buckets[index];
-        while (current) {
-            if (current.key === key) return current.value;
-            current = current.next;
-        }
-        return null;
     }
 
     has(key) {
@@ -152,34 +132,6 @@ export class HashMap {
                 let current = bucket;
                 while (current) {
                     array.push(current.key);
-                    current = current.next;
-                }
-            }
-        })
-        return array;
-    }
-
-    values() {
-        const array = [];
-        this.buckets.forEach(bucket => {
-            if (bucket) {
-                let current = bucket;
-                while (current) {
-                    array.push(current.value);
-                    current = current.next;
-                }
-            }
-        })
-        return array;
-    }
-
-    entries() {
-        const array = [];
-        this.buckets.forEach(bucket => {
-            if (bucket) {
-                let current = bucket;
-                while (current) {
-                    array.push([current.key, current.value]);
                     current = current.next;
                 }
             }

@@ -245,7 +245,7 @@ describe("HashMap (remove)", () => {
         hashMap.set("Han", "Smuggler");
         hashMap.set("Leia", "Rebel Leader");
         hashMap.set(key1, "Bounty Hunter");
-        hashMap.set("Yoda", "Jedi");
+        hashMap.set(key2, "Jedi");
         const index = hashMap.hash(key1);
         const removed = hashMap.remove(key1);
         expect(removed).toBe(true);
