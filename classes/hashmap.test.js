@@ -89,8 +89,8 @@ describe("HashMap (set)", () => {
             ["Lando", "Smuggler"],
             ["Wicket", "Ewok"]
         ];
-        for(const c of characters) {
-            hashMap.set(c[0], c[1]);
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
         }
         expect(hashMap.capacity).toBe(cap * 2)
     })
@@ -274,7 +274,7 @@ describe("HashMap (length)", () => {
     test("return length of multiple keys when stored within same buckets", () => {
         const hashMap = new HashMap();
         hashMap.set("Luke", "Jedi");
-        hashMap.set("Han", "Leia");
+        hashMap.set("Han", "Smuggler");
         hashMap.set("Leia", "Rebel Leader");
         hashMap.set("Boba Fett", "Bounty Hunter");
         hashMap.set("Yoda", "Jedi");
@@ -295,7 +295,7 @@ describe("HashMap (clear)", () => {
     test("clears single node hash map", () => {
         const hashMap = new HashMap();
         hashMap.set("Luke", "Jedi");
-        hashMap.set("Han", "Leia");
+        hashMap.set("Han", "Smuggler");
         hashMap.set("Leia", "Rebel Leader");
         hashMap.clear();
         let key = null;
@@ -307,7 +307,7 @@ describe("HashMap (clear)", () => {
     test("clears multi node bucket hash map", () => {
         const hashMap = new HashMap();
         hashMap.set("Luke", "Jedi");
-        hashMap.set("Han", "Leia");
+        hashMap.set("Han", "Smuggler");
         hashMap.set("Leia", "Rebel Leader");
         hashMap.set("Boba Fett", "Bounty Hunter");
         hashMap.set("Yoda", "Jedi");
@@ -321,13 +321,125 @@ describe("HashMap (clear)", () => {
 })
 
 describe("HashMap (keys)", () => {
-
+    test("returns an empty array from an empty hash map", () => {
+        const hashMap = new HashMap();
+        const array = hashMap.keys();
+        expect(array).toEqual([]);
+    })
+    test("returns an array from single node bucket hash map", () => {
+        const hashMap = new HashMap();
+        const characters = [
+            ["Luke", "Jedi"],
+            ["Han", "Smuggler"],
+            ["Leia", "Rebel Leader"],
+        ];
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
+        }
+        const array = hashMap.keys();
+        for (const [key, value] of characters) {
+            expect(array).toContain(key);
+            expect(array).not.toContain(value);
+        }
+    })
+    test("returns an array from multi node bucket hash map", () => {
+        const hashMap = new HashMap();
+        const characters = [
+            ["Luke", "Jedi"],
+            ["Han", "Smuggler"],
+            ["Leia", "Rebel Leader"],
+            ["Boba Fett", "Bounty Hunter"],
+            ["Yoda", "Jedi"],
+        ];
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
+        }
+        const array = hashMap.keys();
+        for (const [key, value] of characters) {
+            expect(array).toContain(key);
+            expect(array).not.toContain(value);
+        }
+    })
 })
 
 describe("HashMap (values)", () => {
-
+    test("returns an empty array from an empty hash map", () => {
+        const hashMap = new HashMap();
+        const array = hashMap.values();
+        expect(array).toEqual([]);
+    })
+    test("returns an array from single node bucket hash map", () => {
+        const hashMap = new HashMap();
+        const characters = [
+            ["Luke", "Jedi"],
+            ["Han", "Smuggler"],
+            ["Leia", "Rebel Leader"],
+        ];
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
+        }
+        const array = hashMap.values();
+        for (const [key, value] of characters) {
+            expect(array).not.toContain(key);
+            expect(array).toContain(value);
+        }
+    })
+    test("returns an array from multi node bucket hash map", () => {
+        const hashMap = new HashMap();
+        const characters = [
+            ["Luke", "Jedi"],
+            ["Han", "Smuggler"],
+            ["Leia", "Rebel Leader"],
+            ["Boba Fett", "Bounty Hunter"],
+            ["Yoda", "Jedi"],
+        ];
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
+        }
+        const array = hashMap.values();
+        for (const [key, value] of characters) {
+            expect(array).not.toContain(key);
+            expect(array).toContain(value);
+        }
+    })
 })
 
 describe("HashMap (entries)", () => {
-
+    test("returns an empty array from an empty hash map", () => {
+        const hashMap = new HashMap();
+        const array = hashMap.entries();
+        expect(array).toEqual([]);
+    })
+    test("returns an array from single node bucket hash map", () => {
+        const hashMap = new HashMap();
+        const characters = [
+            ["Luke", "Jedi"],
+            ["Han", "Smuggler"],
+            ["Leia", "Rebel Leader"],
+        ];
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
+        }
+        const array = hashMap.entries();
+        for (const c of characters) {
+            expect(array).toEqual(expect.arrayContaining([c]))
+        }
+    })
+    test("returns an array from multi node bucket hash map", () => {
+        const hashMap = new HashMap();
+        const characters = [
+            ["Luke", "Jedi"],
+            ["Han", "Smuggler"],
+            ["Leia", "Rebel Leader"],
+            ["Boba Fett", "Bounty Hunter"],
+            ["Yoda", "Jedi"],
+        ];
+        for (const [key, value] of characters) {
+            hashMap.set(key, value);
+        }
+        const array = hashMap.entries();
+        for (const c of characters) {
+            expect(array).toEqual(expect.arrayContaining([c]))
+        }
+    })
 })

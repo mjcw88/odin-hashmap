@@ -147,14 +147,44 @@ export class HashMap {
     }
 
     keys() {
-
+        const array = [];
+        this.buckets.forEach(bucket => {
+            if (bucket) {
+                let current = bucket;
+                while (current) {
+                    array.push(current.key);
+                    current = current.next;
+                }
+            }
+        })
+        return array;
     }
 
     values() {
-
+        const array = [];
+        this.buckets.forEach(bucket => {
+            if (bucket) {
+                let current = bucket;
+                while (current) {
+                    array.push(current.value);
+                    current = current.next;
+                }
+            }
+        })
+        return array;
     }
 
     entries() {
-        
+        const array = [];
+        this.buckets.forEach(bucket => {
+            if (bucket) {
+                let current = bucket;
+                while (current) {
+                    array.push([current.key, current.value]);
+                    current = current.next;
+                }
+            }
+        })
+        return array;
     }
 }
