@@ -6,7 +6,7 @@ export class HashMap {
         this.buckets = new Array(this.capacity);
     }
 
-    assignKey(key, value, buckets) {
+    #assignKey(key, value, buckets) {
         const index = this.hash(key);
         if (!buckets[index]) {
             buckets[index] = { key, value, next: null };
@@ -31,22 +31,20 @@ export class HashMap {
         }
     }
 
-    isAtCapacity() {
-        if (this.size > (this.capacity * this.loadFactor)) return true;
-        return false;
+    #isAtCapacity() {
+        return this.size > this.capacity * this.loadFactor;
     }
 
-    expandBuckets() {
+    #expandBuckets() {
         this.size = 0;
         this.capacity *= 2;
-        const oldBuckets = this.buckets;
         const newBuckets = new Array(this.capacity);
 
-        oldBuckets.forEach(bucket => {
-            if (bucket.key) {
+        this.buckets.forEach(bucket => {
+            if (bucket?.key) {
                 let current = bucket;
                 while (current) {
-                    this.assignKey(current.key, current.value, newBuckets);
+                    this.#assignKey(current.key, current.value, newBuckets);
                     current = current.next;
                 }
             }
@@ -67,8 +65,8 @@ export class HashMap {
     } 
 
     set(key, value) {
-        this.assignKey(key, value, this.buckets);
-        if (this.isAtCapacity()) this.expandBuckets();
+        this.#assignKey(key, value, this.buckets);
+        if (this.#isAtCapacity()) this.#expandBuckets();
     }
 
     get(key) {

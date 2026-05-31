@@ -97,7 +97,30 @@ describe("HashMap (set)", () => {
 })
 
 describe("HashMap (get)", () => {
-
+    test("returns null if key doesn't exist", () => {
+        const hashMap = new HashMap();
+        const value = hashMap.get("Luke");
+        expect(value).toBeNull();
+    })
+    test("returns value from a single node bucket", () => {
+        const hashMap = new HashMap();
+        const key = "Luke";
+        const value = "Jedi";
+        hashMap.set(key, value);
+        const returnedValue = hashMap.get(key);
+        expect(returnedValue).toBe(value);
+    })
+    test("returns value from a multi node bucket", () => {
+        const hashMap = new HashMap();
+        const key1 = "Luke";
+        const value1 = "Jedi";
+        const key2 = "Boba Fett";
+        const value2 = "Bounty Hunter";
+        hashMap.set(key1, value1);
+        hashMap.set(key2, value2);
+        const returnedValue = hashMap.get(key2);
+        expect(returnedValue).toBe(value2);
+    })
 })
 
 describe("HashMap (has)", () => {
