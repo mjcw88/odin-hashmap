@@ -283,16 +283,16 @@ describe("HashMap (length)", () => {
 })
 
 describe("HashMap (clear)", () => {
-    test.skip("clears already empty hash map", () => {
+    test("clears already empty hash map", () => {
         const hashMap = new HashMap();
         hashMap.clear();
         let key = null;
         hashMap.buckets.forEach(bucket => { 
-            if (bucket.key) key = bucket.key;
+            if (bucket) key = bucket.key;
         })
         expect(key).toBeNull();
     })
-    test.skip("clears single node hash map", () => {
+    test("clears single node hash map", () => {
         const hashMap = new HashMap();
         hashMap.set("Luke", "Jedi");
         hashMap.set("Han", "Leia");
@@ -300,11 +300,11 @@ describe("HashMap (clear)", () => {
         hashMap.clear();
         let key = null;
         hashMap.buckets.forEach(bucket => { 
-            if (bucket.key) key = bucket.key;
+            if (bucket) key = bucket.key;
         })
         expect(key).toBeNull();
     })
-    test.skip("clears multi node bucket hash map", () => {
+    test("clears multi node bucket hash map", () => {
         const hashMap = new HashMap();
         hashMap.set("Luke", "Jedi");
         hashMap.set("Han", "Leia");
@@ -314,7 +314,7 @@ describe("HashMap (clear)", () => {
         hashMap.clear();
         let key = null;
         hashMap.buckets.forEach(bucket => { 
-            if (bucket.key) key = bucket.key;
+            if (bucket) key = bucket.key;
         })
         expect(key).toBeNull();
     })

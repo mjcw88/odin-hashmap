@@ -47,7 +47,7 @@ export class HashMap {
         const newBuckets = new Array(this.capacity);
 
         this.buckets.forEach(bucket => {
-            if (bucket?.key) {
+            if (bucket) {
                 let current = bucket;
                 while (current) {
                     this.#assignKey(current.key, current.value, newBuckets);
@@ -141,7 +141,9 @@ export class HashMap {
     }
 
     clear() {
-
+        this.buckets.forEach((bucket, index) => {
+            if (bucket) this.buckets[index] = null;
+        })
     }
 
     keys() {
